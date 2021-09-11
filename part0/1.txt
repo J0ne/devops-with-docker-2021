@@ -58,31 +58,9 @@ Secret message is: 'You can find the source code here: https://github.com/docker
 
 First:
 jouni@MacBook-Pro ~ % docker run -d -it --name dep ubuntu sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;' 
-ed87bec2b50df379b7689b97107edd4ac46dc9c20808e2d98bef7e70fd87c587
-jouni@MacBook-Pro ~ % docker start dep
-dep
-jouni@MacBook-Pro ~ % docker attach dep
-s
-Searching..
-sh: 1: curl: not found
 
-...
-
-jouni@MacBook-Pro ~ % docker start dep                        
-dep
 jouni@MacBook-Pro ~ % docker exec -it dep apt-get install curl
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-The following additional packages will be installed:
-...
-Setting up curl (7.68.0-1ubuntu2.6) ...
-Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
-Processing triggers for ca-certificates (20210119~20.04.1) ...
-Updating certificates in /etc/ssl/certs...
-0 added, 0 removed; done.
-Running hooks in /etc/ca-certificates/update.d...
-done.
+
 jouni@MacBook-Pro ~ % docker start dep                        
 dep
 jouni@MacBook-Pro ~ % docker attach dep                       
@@ -95,5 +73,5 @@ Searching..
 <h1>Moved Permanently</h1>
 <p>The document has moved <a href="https://www.helsinki.fi/">here</a>.</p>
 </body></html>
-jouni@MacBook-Pro ~ % 
+
 
