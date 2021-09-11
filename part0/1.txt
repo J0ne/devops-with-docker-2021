@@ -75,3 +75,18 @@ Searching..
 </body></html>
 
 
+1.5: Sizes of images
+
+devopsdockeruh/simple-web-service    ubuntu 4e3362e907d5   6 months ago    83MB
+devopsdockeruh/simple-web-service    alpine fd312adc88e0   6 months ago    15.7MB
+
+jouni@MacBook-Pro ~ % docker run -d -it --name alpine1 devopsdockeruh/simple-web-service:alpine
+abeac2c915ddfa79d13f1703d1d8229c188adfea3aaf0192692f182b73f41821
+jouni@MacBook-Pro ~ % docker exec -it alpine1 tail -f ./text.log                             
+2021-09-11 12:28:40 +0000 UTC
+2021-09-11 12:28:42 +0000 UTC
+2021-09-11 12:28:44 +0000 UTC
+2021-09-11 12:28:46 +0000 UTC
+2021-09-11 12:28:48 +0000 UTC
+Secret message is: 'You can find the source code here: https://github.com/docker-hy'
+
