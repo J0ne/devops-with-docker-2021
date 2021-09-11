@@ -1,4 +1,4 @@
-1.1. Getting Started
+1.1: Getting Started
 
 jouni@MacBook-Pro ~ % docker ps -a     
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
@@ -7,7 +7,7 @@ f5c0e63b2e1b   nginx     "/docker-entrypoint.…"   53 seconds ago   Exited (0) 
 aee42c173315   nginx     "/docker-entrypoint.…"   55 seconds ago   Exited (0) 2 seconds ago             ecstatic_beaver
 
 
-1.2. Clean up 
+1.2: Clean up 
 
 [Note: I've some older images but not that nginx]
 
@@ -27,3 +27,29 @@ docker/desktop-vpnkit-controller     v1.0                                       
 k8s.gcr.io/pause                     3.2                                                     80d28bedfe5d   19 months ago   683kB
 kitematic/hello-world-nginx          latest                                                  03b4557ad7b9   6 years ago     7.91MB
 jouni@MacBook-Pro ~ %   
+
+1.3: Secret message
+
+jouni@MacBook-Pro ~ % docker run devopsdockeruh/simple-web-service:ubuntu
+Unable to find image 'devopsdockeruh/simple-web-service:ubuntu' locally
+ubuntu: Pulling from devopsdockeruh/simple-web-service
+5d3b2c2d21bb: Pull complete 
+3fc2062ea667: Pull complete 
+75adf526d75b: Pull complete 
+965d4bbb586a: Pull complete 
+4f4fb700ef54: Pull complete 
+Digest: sha256:d44e1dce398732e18c7c2bad9416a072f719af33498302b02929d4c112e88d2a
+Status: Downloaded newer image for devopsdockeruh/simple-web-service:ubuntu
+Starting log output
+Wrote text to /usr/src/app/text.log
+Wrote text to /usr/src/app/text.log
+...
+jouni@MacBook-Pro ~ % docker ps -a
+CONTAINER ID   IMAGE                                      COMMAND                  CREATED          STATUS                        PORTS     NAMES
+2a890ce41224   devopsdockeruh/simple-web-service:ubuntu   "/usr/src/app/server"    16 minutes ago   Up 16 minutes                           goofy_brahmagupta
+
+In other terminal:
+jouni@MacBook-Pro / % docker exec -it goofy_brahmagupta tail -f ./text.log
+Secret message is: 'You can find the source code here: https://github.com/docker-hy'
+2021-09-11 08:17:39 +0000 UTC
+
