@@ -1,36 +1,29 @@
 1.1. Getting Started
 
-jouni@MacBook-Pro ~ % docker ps -a 
-CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
-181d7719510b   nginx     "nginx -g 'daemon of…"   16 minutes ago   Up 16 minutes               80/tcp    priceless_wiles
-fb8f188b0f18   nginx     "nginx -g 'daemon of…"   16 minutes ago   Up 16 minutes               80/tcp    hungry_leakey
-42339afab0b1   nginx     "nginx -g 'daemon of…"   16 minutes ago   Exited (0) 14 minutes ago             tender_dirac
+jouni@MacBook-Pro ~ % docker ps -a     
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+1fb3f4aabf24   nginx     "/docker-entrypoint.…"   51 seconds ago   Up 51 seconds              80/tcp    optimistic_chatelet
+f5c0e63b2e1b   nginx     "/docker-entrypoint.…"   53 seconds ago   Exited (0) 2 seconds ago             sleepy_lalande
+aee42c173315   nginx     "/docker-entrypoint.…"   55 seconds ago   Exited (0) 2 seconds ago             ecstatic_beaver
 
-1.2. Clean up
 
-jouni@MacBook-Pro ~ % docker ps -a      
-CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
-181d7719510b   nginx     "nginx -g 'daemon of…"   19 minutes ago   Up 19 minutes               80/tcp    priceless_wiles
-fb8f188b0f18   nginx     "nginx -g 'daemon of…"   19 minutes ago   Up 19 minutes               80/tcp    hungry_leakey
-42339afab0b1   nginx     "nginx -g 'daemon of…"   19 minutes ago   Exited (0) 18 minutes ago             tender_dirac
+1.2. Clean up 
 
+[Note: I've some older images but not that nginx]
+
+jouni@MacBook-Pro ~ % docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 jouni@MacBook-Pro ~ % docker images
 REPOSITORY                           TAG                                                     IMAGE ID       CREATED         SIZE
-docker/getting-started               latest                                                  083d7564d904   2 months ago    28MB
-mcr.microsoft.com/mssql/server       2019-latest                                             356de8c1fd95   2 months ago    1.5GB
-hello-world                          latest                                                  d1165f221234   5 months ago    13.3kB
-docker/desktop-kubernetes            kubernetes-v1.19.7-cni-v0.8.5-critools-v1.17.0-debian   93b3398dbfde   6 months ago    285MB
-k8s.gcr.io/kube-proxy                v1.19.7                                                 9d368f4517bb   7 months ago    118MB
-k8s.gcr.io/kube-apiserver            v1.19.7                                                 c15e4f843f01   7 months ago    119MB
-k8s.gcr.io/kube-scheduler            v1.19.7                                                 4fa642720eea   7 months ago    45.6MB
-k8s.gcr.io/kube-controller-manager   v1.19.7                                                 67b3bca112d1   7 months ago    111MB
-k8s.gcr.io/etcd                      3.4.13-0                                                0369cf4303ff   11 months ago   253MB
-k8s.gcr.io/coredns                   1.7.0                                                   bfe3a36ebd25   14 months ago   45.2MB
+docker/desktop-kubernetes            kubernetes-v1.19.7-cni-v0.8.5-critools-v1.17.0-debian   93b3398dbfde   7 months ago    285MB
+k8s.gcr.io/kube-proxy                v1.19.7                                                 9d368f4517bb   8 months ago    118MB
+k8s.gcr.io/kube-apiserver            v1.19.7                                                 c15e4f843f01   8 months ago    119MB
+k8s.gcr.io/kube-scheduler            v1.19.7                                                 4fa642720eea   8 months ago    45.6MB
+k8s.gcr.io/kube-controller-manager   v1.19.7                                                 67b3bca112d1   8 months ago    111MB
+k8s.gcr.io/etcd                      3.4.13-0                                                0369cf4303ff   12 months ago   253MB
+k8s.gcr.io/coredns                   1.7.0                                                   bfe3a36ebd25   15 months ago   45.2MB
 docker/desktop-storage-provisioner   v1.1                                                    e704287ce753   17 months ago   41.8MB
-docker/desktop-vpnkit-controller     v1.0                                                    79da37e5a3aa   17 months ago   36.6MB
-verdaccio/verdaccio                  latest                                                  f8e6ab53ff4b   18 months ago   133MB
-k8s.gcr.io/pause                     3.2                                                     80d28bedfe5d   18 months ago   683kB
-sonarqube                            latest                                                  0956756d5b96   18 months ago   483MB
-nginx                                latest                                                  3f8a4339aadd   3 years ago     108MB
+docker/desktop-vpnkit-controller     v1.0                                                    79da37e5a3aa   18 months ago   36.6MB
+k8s.gcr.io/pause                     3.2                                                     80d28bedfe5d   19 months ago   683kB
 kitematic/hello-world-nginx          latest                                                  03b4557ad7b9   6 years ago     7.91MB
-
+jouni@MacBook-Pro ~ %   
