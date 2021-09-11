@@ -100,3 +100,14 @@ docker run -it devopsdockeruh/pull_exercise sh
 -> 
 ...
 This is the readme, use input "basics" to complete this exercise.
+
+1.7: Two line Dockerfile
+
+Dockerfile:
+# Start from the alpine image that is smaller but no fancy tools
+FROM devopsdockeruh/simple-web-service:alpine
+CMD server
+
+Commands:
+docker build . -t web-server
+docker run web-server
