@@ -133,3 +133,8 @@ CMD ./script.sh
 (Build: docker build . -t curler)
 
 Command: docker run -it curler
+
+1.9: Volumes
+
+touch text.log  
+docker run -v "$(pwd)/text.log:/usr/src/app/text.log" devopsdockeruh/simple-web-service
