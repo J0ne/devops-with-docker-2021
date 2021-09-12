@@ -143,3 +143,17 @@ docker run -v "$(pwd)/text.log:/usr/src/app/text.log" devopsdockeruh/simple-web-
 
 docker run -p 8006:8080 web-server server
 
+1.11: Spring
+
+Dockerfile: 
+FROM openjdk:8
+EXPOSE 3000
+WORKDIR /usr/src/app
+
+# this the hard part COPY . . didn't work with mac.
+COPY /spring-example-project /usr/src/app 
+RUN ./mvnw package
+#RUN java -jar ./target/docker-example-1.1.3.jar
+CMD ["java", "-jar", "./target/docker-example-1.1.3.jar"]
+
+Commands: docker build . -t spring && docker run -p 8080:8080 spring
