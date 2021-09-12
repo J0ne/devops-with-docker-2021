@@ -138,3 +138,8 @@ Command: docker run -it curler
 
 touch text.log  
 docker run -v "$(pwd)/text.log:/usr/src/app/text.log" devopsdockeruh/simple-web-service
+
+1.10: Ports Open
+
+docker run -p 8006:8080 web-server server
+
