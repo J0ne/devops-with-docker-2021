@@ -59,7 +59,7 @@ Secret message is: 'You can find the source code here: https://github.com/docker
 First:
 jouni@MacBook-Pro ~ % docker run -d -it --name dep ubuntu sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;' 
 
-jouni@MacBook-Pro ~ % docker exec -it dep apt-get install curl
+jouni@MacBook-Pro ~ % docker exec -it dep apt-get install curl  (<- edit: I think I did apt-get update earlier when struggling with this)
 
 jouni@MacBook-Pro ~ % docker start dep                        
 dep
@@ -111,3 +111,25 @@ CMD server
 Commands:
 docker build . -t web-server
 docker run web-server
+
+1.8: Image for Script
+
+Dockerfile:
+# Start from the ubuntu image
+FROM ubuntu:18.04
+
+# Use /usr/src/app as our workdir. The following instructions will be executed in this location.
+WORKDIR /usr/src/app
+
+# scipt.sh contains echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;
+COPY script.sh .
+
+
+RUN chmod +x script.sh
+RUN apt-get update && apt-get install -y curl 
+
+CMD ./script.sh
+
+(Build: docker build . -t curler)
+
+Command: docker run -it curler
