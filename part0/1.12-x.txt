@@ -28,3 +28,34 @@ ENV PORT=8080
 ENTRYPOINT [ "./server" ]
 
 Command: docker build . -t back && docker run -p 8080:8080 back
+
+1.14: Environment
+
+Frontend
+
+Dockerfile:
+FROM node:14
+WORKDIR /usr/src/app
+COPY /example-frontend /usr/src/app
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+RUN npm install && \
+npm run build
+
+RUN npm i -g serve
+
+CMD ["serve", "-s", "-l", "5000", "build"]
+
+Commands: docker build . -t front && docker run -p 5000:5000 front
+
+Backend:
+
+Dockerfile:
+FROM golang:1.16
+WORKDIR /usr/src/app
+COPY /example-backend /usr/src/app
+RUN go build
+ENV REQUEST_ORIGIN=http://localhost:5000
+ENV PORT=8080
+ENTRYPOINT [ "./server" ]
+
+Commands: docker build . -t back && docker run -p 8080:8080 back
