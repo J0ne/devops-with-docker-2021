@@ -1,0 +1,12 @@
+1.12: Hello, frontend!
+
+Dockerfile:
+FROM node:14
+WORKDIR /usr/src/app
+COPY /example-frontend /usr/src/app
+RUN npm install && \
+npm run build
+
+RUN npm i -g serve
+
+CMD ["serve", "-s", "-l", "5000", "build"]
