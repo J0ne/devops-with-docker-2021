@@ -10,3 +10,5 @@ npm run build
 RUN npm i -g serve
 
 CMD ["serve", "-s", "-l", "5000", "build"]
+
+And the message: Exercise 1.12: Congratulations! You configured your ports correctly!
