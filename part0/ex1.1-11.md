@@ -1,4 +1,4 @@
-1.1: Getting Started
+### 1.1: Getting Started
 
 jouni@MacBook-Pro ~ % docker ps -a     
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
@@ -7,7 +7,7 @@ f5c0e63b2e1b   nginx     "/docker-entrypoint.…"   53 seconds ago   Exited (0) 
 aee42c173315   nginx     "/docker-entrypoint.…"   55 seconds ago   Exited (0) 2 seconds ago             ecstatic_beaver
 
 
-1.2: Clean up 
+### 1.2: Clean up 
 
 [Note: I've some older images but not that nginx]
 
@@ -28,7 +28,7 @@ k8s.gcr.io/pause                     3.2                                        
 kitematic/hello-world-nginx          latest                                                  03b4557ad7b9   6 years ago     7.91MB
 jouni@MacBook-Pro ~ %   
 
-1.3: Secret message
+### 1.3: Secret message
 
 jouni@MacBook-Pro ~ % docker run devopsdockeruh/simple-web-service:ubuntu
 Unable to find image 'devopsdockeruh/simple-web-service:ubuntu' locally
@@ -54,7 +54,7 @@ Secret message is: 'You can find the source code here: https://github.com/docker
 2021-09-11 08:17:39 +0000 UTC
 
 
-1.4: Missing dependencies
+### 1.4: Missing dependencies
 
 First:
 jouni@MacBook-Pro ~ % docker run -d -it --name dep ubuntu sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;' 
@@ -75,7 +75,7 @@ Searching..
 </body></html>
 
 
-1.5: Sizes of images
+### 1.5: Sizes of images
 
 devopsdockeruh/simple-web-service    ubuntu 4e3362e907d5   6 months ago    83MB
 devopsdockeruh/simple-web-service    alpine fd312adc88e0   6 months ago    15.7MB
@@ -90,7 +90,7 @@ jouni@MacBook-Pro ~ % docker exec -it alpine1 tail -f ./text.log
 2021-09-11 12:28:48 +0000 UTC
 Secret message is: 'You can find the source code here: https://github.com/docker-hy'
 
-1.6: Hello Docker Hub
+### 1.6: Hello Docker Hub
 From Docker Hub site (README.md):
 "This is the secret message"
 
@@ -101,19 +101,23 @@ docker run -it devopsdockeruh/pull_exercise sh
 ...
 This is the readme, use input "basics" to complete this exercise.
 
-1.7: Two line Dockerfile
+### 1.7: Two line Dockerfile
 
 Dockerfile:
+```sh
 # Start from the alpine image that is smaller but no fancy tools
 FROM devopsdockeruh/simple-web-service:alpine
 CMD server
+```
 
 Commands:
-docker build . -t web-server
-docker run web-server
+``docker build . -t web-server``
+``docker run web-server``
 
-1.8: Image for Script
+### 1.8: Image for Script
 
+Dockerfile:
+```sh
 Dockerfile:
 # Start from the ubuntu image
 FROM ubuntu:18.04
@@ -124,28 +128,29 @@ WORKDIR /usr/src/app
 # scipt.sh contains echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;
 COPY script.sh .
 
-
 RUN chmod +x script.sh
 RUN apt-get update && apt-get install -y curl 
 
 CMD ./script.sh
+```
 
 (Build: docker build . -t curler)
 
-Command: docker run -it curler
+Command: ``docker run -it curler``
 
-1.9: Volumes
+### 1.9: Volumes
 
-touch text.log  
-docker run -v "$(pwd)/text.log:/usr/src/app/text.log" devopsdockeruh/simple-web-service
+``touch text.log  
+docker run -v "$(pwd)/text.log:/usr/src/app/text.log" devopsdockeruh/simple-web-service``
 
-1.10: Ports Open
+### 1.10: Ports Open
 
-docker run -p 8006:8080 web-server server
+``docker run -p 8006:8080 web-server server``
 
-1.11: Spring
+### 1.11: Spring
 
 Dockerfile: 
+```sh
 FROM openjdk:8
 EXPOSE 3000
 WORKDIR /usr/src/app
@@ -155,5 +160,6 @@ COPY /spring-example-project /usr/src/app
 RUN ./mvnw package
 #RUN java -jar ./target/docker-example-1.1.3.jar
 CMD ["java", "-jar", "./target/docker-example-1.1.3.jar"]
+```
 
-Commands: docker build . -t spring && docker run -p 8080:8080 spring
+Commands: ``docker build . -t spring && docker run -p 8080:8080 spring``
