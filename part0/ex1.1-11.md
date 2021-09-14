@@ -101,12 +101,13 @@ Secret message is: 'You can find the source code here: https://github.com/docker
 ```
 
 ### 1.6: Hello Docker Hub
+
 From Docker Hub site (README.md):
 "This is the secret message"
 
 Option 2: 
-docker run -it devopsdockeruh/pull_exercise sh
-/usr/app # less README.md
+``docker run -it devopsdockeruh/pull_exercise sh
+/usr/app # less README.md``
 -> 
 ...
 This is the readme, use input "basics" to complete this exercise.
