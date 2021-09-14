@@ -1,16 +1,18 @@
 ### 1.1: Getting Started
 
+```sh
 jouni@MacBook-Pro ~ % docker ps -a     
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
 1fb3f4aabf24   nginx     "/docker-entrypoint.…"   51 seconds ago   Up 51 seconds              80/tcp    optimistic_chatelet
 f5c0e63b2e1b   nginx     "/docker-entrypoint.…"   53 seconds ago   Exited (0) 2 seconds ago             sleepy_lalande
 aee42c173315   nginx     "/docker-entrypoint.…"   55 seconds ago   Exited (0) 2 seconds ago             ecstatic_beaver
-
+```
 
 ### 1.2: Clean up 
 
 [Note: I've some older images but not that nginx]
 
+```sh
 jouni@MacBook-Pro ~ % docker ps -a
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 jouni@MacBook-Pro ~ % docker images
@@ -27,9 +29,11 @@ docker/desktop-vpnkit-controller     v1.0                                       
 k8s.gcr.io/pause                     3.2                                                     80d28bedfe5d   19 months ago   683kB
 kitematic/hello-world-nginx          latest                                                  03b4557ad7b9   6 years ago     7.91MB
 jouni@MacBook-Pro ~ %   
+```
 
 ### 1.3: Secret message
 
+```sh
 jouni@MacBook-Pro ~ % docker run devopsdockeruh/simple-web-service:ubuntu
 Unable to find image 'devopsdockeruh/simple-web-service:ubuntu' locally
 ubuntu: Pulling from devopsdockeruh/simple-web-service
@@ -47,20 +51,23 @@ Wrote text to /usr/src/app/text.log
 jouni@MacBook-Pro ~ % docker ps -a
 CONTAINER ID   IMAGE                                      COMMAND                  CREATED          STATUS                        PORTS     NAMES
 2a890ce41224   devopsdockeruh/simple-web-service:ubuntu   "/usr/src/app/server"    16 minutes ago   Up 16 minutes                           goofy_brahmagupta
+```
 
 In other terminal:
+```sh
 jouni@MacBook-Pro / % docker exec -it goofy_brahmagupta tail -f ./text.log
 Secret message is: 'You can find the source code here: https://github.com/docker-hy'
 2021-09-11 08:17:39 +0000 UTC
-
+```
 
 ### 1.4: Missing dependencies
 
 First:
-jouni@MacBook-Pro ~ % docker run -d -it --name dep ubuntu sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;' 
+``jouni@MacBook-Pro ~ % docker run -d -it --name dep ubuntu sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;' ``
 
-jouni@MacBook-Pro ~ % docker exec -it dep apt-get install curl  (<- edit: I think I did apt-get update earlier when struggling with this)
+``jouni@MacBook-Pro ~ % docker exec -it dep apt-get install curl  (<- edit: I think I did apt-get update earlier when struggling with this)``
 
+```sh
 jouni@MacBook-Pro ~ % docker start dep                        
 dep
 jouni@MacBook-Pro ~ % docker attach dep                       
@@ -73,13 +80,15 @@ Searching..
 <h1>Moved Permanently</h1>
 <p>The document has moved <a href="https://www.helsinki.fi/">here</a>.</p>
 </body></html>
-
+```
 
 ### 1.5: Sizes of images
 
+```sh
 devopsdockeruh/simple-web-service    ubuntu 4e3362e907d5   6 months ago    83MB
 devopsdockeruh/simple-web-service    alpine fd312adc88e0   6 months ago    15.7MB
-
+```
+```sh
 jouni@MacBook-Pro ~ % docker run -d -it --name alpine1 devopsdockeruh/simple-web-service:alpine
 abeac2c915ddfa79d13f1703d1d8229c188adfea3aaf0192692f182b73f41821
 jouni@MacBook-Pro ~ % docker exec -it alpine1 tail -f ./text.log                             
@@ -89,6 +98,7 @@ jouni@MacBook-Pro ~ % docker exec -it alpine1 tail -f ./text.log
 2021-09-11 12:28:46 +0000 UTC
 2021-09-11 12:28:48 +0000 UTC
 Secret message is: 'You can find the source code here: https://github.com/docker-hy'
+```
 
 ### 1.6: Hello Docker Hub
 From Docker Hub site (README.md):
