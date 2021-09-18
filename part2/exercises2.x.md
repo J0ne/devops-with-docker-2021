@@ -41,3 +41,24 @@ message: "You connected to the following path: /",
 path: "/"
 }``
 
+### 2.3
+
+```sh
+version: "3.5"
+
+services:
+  front_end:
+    build: ./frontend
+    ports:
+      - "5000:5000"
+    environment: 
+      - REACT_APP_BACKEND_URL=http://localhost:8080
+    command: ["serve", "-s", "-l", "5000", "build"]
+    
+  back_end:
+    build: ./backend
+    ports: 
+      - "8080:8080"
+    environment: 
+      - REQUEST_ORIGIN=http://localhost:5000
+ ```
