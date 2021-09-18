@@ -22,3 +22,22 @@ CMD []
 ```
 And it worked! I guess this is ok...
 
+### 2.2
+
+```sh
+version: "3.5"
+
+services:
+  web_service:
+    build: .
+    ports:
+      - 8000:8080
+    command: ["server"] 
+```
+
+And the browser:
+``{
+message: "You connected to the following path: /",
+path: "/"
+}``
+
