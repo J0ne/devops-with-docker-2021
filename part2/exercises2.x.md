@@ -88,3 +88,9 @@ services:
     
 ```
 
+### 2.5
+
+```sh
+docker compose up -d --scale compute=10
+```
+
