@@ -127,4 +127,3 @@ services:
     container_name: db
 
 ```
-    build: ./backend
