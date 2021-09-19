@@ -62,3 +62,29 @@ services:
     environment: 
       - REQUEST_ORIGIN=http://localhost:5000
  ```
+
+### 2.4
+
+```sh
+version: "3.5"
+
+services:
+  front-end:
+    build: ./frontend
+    ports:
+      - 5000:5000
+
+    command: ["serve", "-s", "-l", "5000", "build"]
+    
+  backend-app:
+    build: ./backend
+    environment: 
+      - REDIS_HOST=redis
+    ports:
+      - 8080:8080
+
+  redis:
+    image: redis
+    
+```
+
