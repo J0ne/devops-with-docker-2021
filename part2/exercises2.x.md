@@ -127,3 +127,29 @@ services:
     container_name: db
 
 ```
+
+2.7.
+
+```sh
+version: "3.5"
+
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - model:/src/model
+    depends_on: 
+      - training
+  front-end:
+    build: ./frontend
+    ports:
+      - 3000:3000
+  training:
+    build: ./training
+    volumes:
+      - model:/src/model
+      - ./images:/src/imgs
+volumes: 
+  model:
+```
+I had some hard times with this one. It just didn't work on my machine - either did the model solution (the difference was to point the build commands to git repos). Anyway this was my solution.
