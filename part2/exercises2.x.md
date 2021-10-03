@@ -261,7 +261,7 @@ services:
  
  All buttons work after I just fixed the cors error  after adding nginx (REQUEST_ORIGIN=http://localhost).
 
-## nginx.confg:
+#### nginx.confg:
 ```sh
 events { worker_connections 1024; }
 
@@ -281,7 +281,7 @@ events { worker_connections 1024; }
   }
  ```
   
-## docker-compose.yml:
+#### docker-compose.yml:
 
 ```sh
 version: "3.5"
