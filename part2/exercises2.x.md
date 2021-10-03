@@ -256,3 +256,71 @@ services:
       - ./database:/var/lib/postgresql/data
     container_name: db
  ```
+ 
+ ### 2.10
+ 
+ All buttons work after I just fixed the cors error  after adding nginx (REQUEST_ORIGIN=http://localhost).
+
+## nginx.confg:
+```sh
+events { worker_connections 1024; }
+
+  http {
+    server {
+      listen 80;
+
+      location / {
+        proxy_pass http://front-end:5000;
+      }
+
+      location /api/ {
+        proxy_set_header Host $host;
+        proxy_pass http://backend-app:8080/;
+      }
+    }
+  }
+ ```
+  
+## docker-compose.yml:
+
+```sh
+version: "3.5"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+
+  front-end:
+    build: ./frontend
+    ports:
+      - 5000:5000
+    command: ["serve", "-s", "-l", "5000", "build"]
+    
+  backend-app:
+    build: ./backend
+    environment: 
+      - REDIS_HOST=redis
+      - POSTGRES_PASSWORD=postgres1
+      - POSTGRES_HOST=db
+      - REQUEST_ORIGIN=http://localhost
+    ports:
+      - 8080:8080
+
+  redis:
+    image: redis
+
+  db:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres1
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    container_name: db
+```
+
