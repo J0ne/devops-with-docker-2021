@@ -214,3 +214,45 @@ events { worker_connections 1024; }
   }
 ```
 
+### 2.9
+
+```sh
+version: "3.5"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+
+  front-end:
+    build: ./frontend
+    ports:
+      - 5000:5000
+    command: ["serve", "-s", "-l", "5000", "build"]
+    
+  backend-app:
+    build: ./backend
+    environment: 
+      - REDIS_HOST=redis
+      - POSTGRES_PASSWORD=postgres1
+      - POSTGRES_HOST=db
+      - REQUEST_ORIGIN=http://localhost
+    ports:
+      - 8080:8080
+
+  redis:
+    image: redis
+
+  db:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres1
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    container_name: db
+ ```
