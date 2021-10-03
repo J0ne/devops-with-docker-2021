@@ -128,7 +128,7 @@ services:
 
 ```
 
-2.7.
+### 2.7.
 
 ```sh
 version: "3.5"
@@ -153,3 +153,64 @@ volumes:
   model:
 ```
 I had some hard times with this one. It just didn't work on my machine - either did the model solution (the difference was to point the build commands to git repos). Anyway this was my solution.
+
+### 2.8
+
+```sh
+version: "3.5"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+
+  front-end:
+    build: ./frontend
+    ports:
+      - 5000:5000
+    command: ["serve", "-s", "-l", "5000", "build"]
+    
+  backend-app:
+    build: ./backend
+    environment: 
+      - REDIS_HOST=redis
+      - POSTGRES_PASSWORD=postgres1
+      - POSTGRES_HOST=db
+    ports:
+      - 8080:8080
+
+  redis:
+    image: redis
+
+  db:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres1
+    container_name: db
+  ```
+  
+nginx.conf:
+```sh
+events { worker_connections 1024; }
+
+  http {
+    server {
+      listen 80;
+
+      location / {
+        proxy_pass http://front-end:5000;
+      }
+
+      location /api/ {
+        proxy_set_header Host $host;
+        proxy_pass http://backend-app:8080/;
+      }
+    }
+  }
+```
+
