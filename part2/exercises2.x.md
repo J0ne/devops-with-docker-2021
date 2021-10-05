@@ -326,5 +326,26 @@ services:
 
 ### 2.11
 
-I created a simple project for developing web components ( by using [open-wc](https://open-wc.org/guides/) communitys scaffolding tool). 
+I created a simple project for developing web components ( by using [open-wc community's](https://open-wc.org/guides/) scaffolding tool). 
 The repo with Dockerfile and docker-compose file is [here](https://github.com/J0ne/web-components-dev).
+The docker-compose.yml runs ```sh npm run storybook``` by default. 
+
+docker-compose.yml:
+
+```sh
+version: '3.7'
+
+services:
+  awesome-dev:
+    build: . # Build with the Dockerfile here
+    command: npm run storybook # Run npm storybook as the command
+    ports: 
+      - 8001:8000 # storybook runs at 8000, publish that one
+    volumes:
+      - ./:/usr/src/app # Let us modify the contents of the container locally
+      - node_modules:/usr/src/app/node_modules # A bit of node magic, this ensures the dependencies built for the image are not available locally.
+    container_name: awesome-dev # Container name for convenience
+
+volumes: # This is required for the node_modules named volume
+  node_modules:
+```
