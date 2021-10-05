@@ -328,7 +328,7 @@ services:
 
 I created a simple project for developing web components ( by using [open-wc community's](https://open-wc.org/guides/) scaffolding tool). 
 The repo with Dockerfile and docker-compose file is [here](https://github.com/J0ne/web-components-dev).
-The docker-compose.yml runs ```sh npm run storybook``` by default. 
+The docker-compose.yml runs ```npm run storybook``` by default. 
 
 docker-compose.yml:
 
