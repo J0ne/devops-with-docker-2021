@@ -326,5 +326,5 @@ services:
 
 ### 2.11
 
-I created a simple project for developing web components ( by using open-wc[https://open-wc.org/guides/] communitys scaffolding tool). 
-The repo with Dockerfile and docker-compose file is here[https://github.com/J0ne/web-components-dev].
+I created a simple project for developing web components ( by using [open-wc](https://open-wc.org/guides/) communitys scaffolding tool). 
+The repo with Dockerfile and docker-compose file is [here](https://github.com/J0ne/web-components-dev).
