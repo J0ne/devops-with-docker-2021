@@ -82,8 +82,8 @@ RUN npm i -g serve
 
 
 
-34_backend-app  467MB
-34_front-end    447MB
+- 34_backend-app  467MB
+- 34_front-end    447MB
 
 Backend:
 ```sh
