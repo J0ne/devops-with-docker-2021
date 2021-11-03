@@ -52,12 +52,14 @@ golang:1.16 -> golang:alpine
 
  467MB 
 ->
+```sh
 FROM golang:alpine
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 ENV REQUEST_ORIGIN=http://localhost:5000
 RUN go build
 ENTRYPOINT [ "./server" ]
+```
 
 Frontend:
 
@@ -65,7 +67,7 @@ At first: 1.17GB
 
 node:14 -> node:14-alpine
 -> 344MB
-
+```sh
 FROM node:14-alpine
 WORKDIR /usr/src/app
 COPY . /usr/src/app
@@ -73,5 +75,5 @@ ENV REACT_APP_BACKEND_URL=http://localhost:8080
 RUN npm install && \
     npm run build
 RUN npm i -g serve
-
+```
 
