@@ -41,4 +41,37 @@ RUN npm install && \
 
 RUN npm i -g serve
 ```
+### 3.4
+
+I managed to reduce the size mostly by changing the base image. But nothing else since the image files were so tiny.
+Disclaimer: at this exercise I didn't fix the ``chown``command. I just tried to examine the size of images even they did not work properly after... :)
+
+Backend:
+At first: 1.06GB 
+golang:1.16 -> golang:alpine
+
+ 467MB 
+->
+FROM golang:alpine
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+ENV REQUEST_ORIGIN=http://localhost:5000
+RUN go build
+ENTRYPOINT [ "./server" ]
+
+Frontend:
+
+At first: 1.17GB
+
+node:14 -> node:14-alpine
+-> 344MB
+
+FROM node:14-alpine
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+RUN npm install && \
+    npm run build
+RUN npm i -g serve
+
 
