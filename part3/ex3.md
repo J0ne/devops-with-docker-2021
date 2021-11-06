@@ -161,3 +161,16 @@ EXPOSE 8080
 ENTRYPOINT ["/app/server"]
 ```
 --> backend 18MB
+
+### 3.7
+
+Starting point (this was the one 3.1, I already tried to do multistage build).
+```sh
+Image name: awesome:3.7first 
+Total Image size: 136 MB
+Potential wasted space: 3.7 MB
+Image efficiency score: 98 %  
+```
+Quite slim already, but e.g. not taken care of any security issues etc. Also the deployment at its final step failed (nginx in heroku...)
+
+
