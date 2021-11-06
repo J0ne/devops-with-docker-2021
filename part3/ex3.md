@@ -141,3 +141,23 @@ RUN npm i -g serve
 EXPOSE 5000
 CMD [ "serve","-s", "-l", "5000", "/usr/src/app"]
 ```
+
+### 3.6: Multi-stage backend
+
+Dockerfile:
+```sh
+FROM golang:1.16-buster as build
+WORKDIR /app
+COPY . /app
+ENV REQUEST_ORIGIN=http://localhost:5000
+# RUN adduser -D userapp && \
+#     chown -R userapp /app
+RUN CGO_ENABLED=0 go build
+
+FROM scratch
+COPY --from=build /app /app
+USER nonroot:nonroot
+EXPOSE 8080
+ENTRYPOINT ["/app/server"]
+```
+--> backend 18MB
