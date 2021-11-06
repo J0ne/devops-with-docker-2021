@@ -82,14 +82,42 @@ RUN npm i -g serve
 
 Backend
 
-- ``FROM golang:1.16``          1.07GB
-->
-- ``FROM golang:1.16-alpine``   447MB
+* ``FROM golang:1.16``          1.07GB
+*  ->
+* ``FROM golang:1.16-alpine``   447MB
+
+Dockerfile after:
+```sh
+FROM golang:1.16-alpine
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+ENV REQUEST_ORIGIN=http://localhost:5000
+RUN adduser -D userapp
+RUN chown -R userapp /usr/src/app
+USER userapp
+RUN go build
+ENTRYPOINT [ "./server" ]
+```
 
 Frontend
 
-- ``FROM node:14``               1.27GB
-- ``FROM node:14-alpine``        448MB
+* ``FROM node:14``               1.27GB
+* ->
+* ``FROM node:14-alpine``        448MB
+
+Dockerfile after:
+```sh
+FROM node:14-alpine
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+RUN adduser -D appuser
+RUN chown -R appuser /usr/local/* /usr/src/app
+USER appuser
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+RUN npm install && \
+    npm run build && \
+    npm i -g serve
+```
 
 
 
