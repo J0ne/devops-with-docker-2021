@@ -81,9 +81,12 @@ RUN npm i -g serve
 ### 3.5
 
 
+With Ubuntu
 
 - 34_backend-app  467MB
 - 34_front-end    447MB
+
+Alpine:
 
 Backend:
 ```sh
@@ -111,4 +114,28 @@ ENV REACT_APP_BACKEND_URL=http://localhost:8080
 RUN npm install && \
     npm run build
 RUN npm i -g serve
+```
+
+[TODO] Sizes after
+
+
+### 3.6: Multi-stage frontend
+
+Dockerfile:
+```sh
+FROM node:14-alpine as builder
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+RUN adduser -D userapp
+RUN chown -R userapp /usr/local/ /usr/src/app
+USER userapp
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+RUN npm ci && \
+    npm run build
+
+FROM node:14-slim
+COPY --from=builder /usr/src/app/build /usr/src/app
+RUN npm i -g serve
+EXPOSE 5000
+CMD [ "serve","-s", "-l", "5000", "/usr/src/app"]
 ```
