@@ -81,42 +81,19 @@ RUN npm i -g serve
 ### 3.5
 
 
-With Ubuntu
+Backend
 
-- 34_backend-app  467MB
-- 34_front-end    447MB
-
-Alpine:
-
-Backend:
-```sh
-FROM golang:alpine
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-ENV REQUEST_ORIGIN=http://localhost:5000
-RUN adduser -D userapp
-RUN chown -R userapp /usr/src/app
-USER userapp
-RUN go build
-ENTRYPOINT [ "./server" ]
-```
+- ``FROM golang:1.16``          1.07GB
+->
+- ``FROM golang:1.16-alpine``   447MB
 
 Frontend
 
-```sh
-FROM node:14-alpine
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-RUN adduser -D userapp
-RUN chown -R userapp /usr/local/ /usr/src/app
-USER userapp
-ENV REACT_APP_BACKEND_URL=http://localhost:8080
-RUN npm install && \
-    npm run build
-RUN npm i -g serve
-```
 
-[TODO] Sizes after
+- 34_front-end    447MB
+
+
+
 
 
 ### 3.6: Multi-stage frontend
