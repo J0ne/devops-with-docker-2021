@@ -32,9 +32,8 @@ FROM node:14
 WORKDIR /usr/src/app
 COPY . /usr/src/app
 RUN useradd -m appuser
-USER appuser
 RUN chown -R appuser /usr/src/app
-
+USER appuser
 ENV REACT_APP_BACKEND_URL=http://localhost:8080
 RUN npm install && \
     npm run build
@@ -89,10 +88,8 @@ Backend
 
 Frontend
 
-
-- 34_front-end    447MB
-
-
+- ``FROM node:14``               1.27GB
+- ``FROM node:14-alpine``        448MB
 
 
 
