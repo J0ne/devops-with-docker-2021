@@ -183,3 +183,16 @@ Potential wasted space: 3.7 MB
 Image efficiency score: 98 %                                          
 ```
 Anyway, the latter image is non-root nginx, so it is a safer solution.
+Final:
+```sh
+FROM node:14 as builder
+WORKDIR /usr/src/app
+COPY package* ./
+RUN npm ci && \
+    npm run storybook:build
+COPY /storybook-static ./storybook-static
+
+FROM nginxinc/nginx-unprivileged
+COPY --from=builder /usr/src/app/storybook-static /usr/share/nginx/html
+CMD ["nginx", "-g daemon off;"]
+```
