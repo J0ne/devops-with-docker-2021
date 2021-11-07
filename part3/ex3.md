@@ -172,5 +172,14 @@ Potential wasted space: 3.7 MB
 Image efficiency score: 98 %  
 ```
 Quite slim already, but e.g. not taken care of any security issues etc. Also the deployment at its final step failed (nginx in heroku...)
+->
+Finally:
 
-
+I couldn't reduce the size since the image was quite slim already
+```sh
+Image name: awesome:latest-nginx-u
+Total Image size: 136 MB
+Potential wasted space: 3.7 MB
+Image efficiency score: 98 %                                          
+```
+Anyway, the latter image is non-root nginx, so it is a safer solution.
